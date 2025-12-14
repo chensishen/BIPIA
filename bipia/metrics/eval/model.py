@@ -10,11 +10,14 @@ import openai
 from accelerate.logging import get_logger
 from openai.error import (
     RateLimitError,
-    InvalidRequestError,
-    Timeout,
+    BadRequestError,
+    # InvalidRequestError,
+    # Timeout,
+    APITimeoutError,
     APIConnectionError,
+    InternalServerError,
+    # ServiceUnavailableError,
     APIError,
-    ServiceUnavailableError,
 )
 
 from .base import BaseEval
@@ -76,7 +79,7 @@ class ModelEval(BaseEval):
                 logger.debug(e, exc_info=True)
                 retry_time = get_retry_time(str(e))
                 time.sleep(retry_time)
-            except Timeout as e:
+            except APITimeoutError as e:
                 logger.debug(e, exc_info=True)
                 time.sleep(1)
             except APIConnectionError as e:
@@ -85,10 +88,10 @@ class ModelEval(BaseEval):
             except APIError as e:
                 logger.debug(e, exc_info=True)
                 time.sleep(1)
-            except ServiceUnavailableError as e:
+            except InternalServerError as e:
                 logger.debug(e, exc_info=True)
                 time.sleep(1)
-            except InvalidRequestError as e:
+            except BadRequestError as e:
                 logger.warning(e, exc_info=True)
                 success = True
                 response = {"choices": []}
@@ -135,7 +138,7 @@ class ModelEval(BaseEval):
                 logger.debug(e, exc_info=True)
                 retry_time = get_retry_time(str(e))
                 time.sleep(retry_time)
-            except Timeout as e:
+            except APITimeoutError as e:
                 logger.debug(e, exc_info=True)
                 time.sleep(1)
             except APIConnectionError as e:
@@ -144,10 +147,10 @@ class ModelEval(BaseEval):
             except APIError as e:
                 logger.debug(e, exc_info=True)
                 time.sleep(1)
-            except ServiceUnavailableError as e:
+            except InternalServerError as e:
                 logger.debug(e, exc_info=True)
                 time.sleep(1)
-            except InvalidRequestError as e:
+            except BadRequestError as e:
                 logger.warning(e, exc_info=True)
                 success = True
                 response = {"choices": []}
