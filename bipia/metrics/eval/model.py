@@ -8,7 +8,7 @@ import re
 import openai
 
 from accelerate.logging import get_logger
-from openai.error import (
+from openai import (
     RateLimitError,
     BadRequestError,
     # InvalidRequestError,
