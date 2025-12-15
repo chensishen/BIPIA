@@ -1,0 +1,7 @@
+api_key: "ms-15a31da1-a89d-416a-8146-b6f1450d9381"
+api_type: "openai"
+base_url: "https://api-inference.modelscope.cn/v1/"
+
+model: "Qwen/Qwen3-VL-8B-Instruct"
+chat: true
+llm_name: "Qwen3-VL-8B-Instruct"

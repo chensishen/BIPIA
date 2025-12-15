@@ -1,6 +1,6 @@
 python run.py --seed 2023 --dataset_name code \
 --context_data_file path/of/external/conten/file \
 --attack_data_file path/of/attack/file \
---llm_config_file config/alpaca_7b.yaml \
+--llm_config_file config/qwen3_VL-8B.yaml \
 --batch_size 20 --output_path path/of/output/file \
 --log_steps 10 --resume
